@@ -1,0 +1,51 @@
+#!/bin/sh
+#
+# Copyright (c) 2017 Red Hat, Inc. All rights reserved. This copyrighted material 
+# is made available to anyone wishing to use, modify, copy, or
+# redistribute it subject to the terms and conditions of the GNU General
+# Public License v.2.
+#
+# This program is distributed in the hope that it will be useful, but WITHOUT ANY
+# WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+# PARTICULAR PURPOSE. See the GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+#
+#
+# Author: Brian Brock <bbrock@redhat.com>
+#
+# custom bash_profile
+# can be sourced from root account with:
+#
+# 	source $BASEDIR/setup/bash_profile
+#
+
+BASEDIR="$HOME/setup"
+
+alias ls='ls -F --color'
+
+export PATH=$PATH:$BASEDIR/bin
+export LESS='-MJRi'
+export MOST_SWITCHES='-w'
+export CVS_RSH=ssh
+export EDITOR=vim
+export RELEASE=`rpm -q --qf='%{VERSION}' redhat-release`
+
+
+echo
+cat /etc/redhat-release
+rpm -qfi /etc/redhat-release | grep -i 'install'
+echo
+#grep 'dir=' anaconda-ks.cfg | sed -e 's,.*dir=.*/RHEL\(.*\)/os/,RHEL\1,'
+grep 'dir=' anaconda-ks.cfg | awk -F'/' '{ print $7 "   " $10 "   " $6 }'  
+echo
+uname -r
+echo
+uptime
+echo
+
+
+source $BASEDIR/prompt_set
+eval `dircolors $BASEDIR/dircolors.xterm`

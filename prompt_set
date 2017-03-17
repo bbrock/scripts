@@ -1,0 +1,36 @@
+#!/bin/sh
+#
+# Copyright (c) 2017 Red Hat, Inc. All rights reserved. This copyrighted material 
+# is made available to anyone wishing to use, modify, copy, or
+# redistribute it subject to the terms and conditions of the GNU General
+# Public License v.2.
+#
+# This program is distributed in the hope that it will be useful, but WITHOUT ANY
+# WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+# PARTICULAR PURPOSE. See the GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+#
+#
+# Author: Brian Brock <bbrock@redhat.com>
+#
+TTN=`tty|cut -b 6-`
+
+if [ `id -u` -gt 0 ]; then
+    C1='[0;32m'
+    C2='[0;34m'
+    C3='[1;30m'
+    C4='[0m'
+else
+    C1='[1;33m'
+    C2='[0;33m'
+    C3='[0;31m'
+    C4='[0m'
+fi
+
+#PS1='\n${C3}\d \T${C4}\n${C3}\u@\h${C4} ${C2}\w${C4}\n${C3}\$ ${C4}'
+PS1='\n${C3}\d \T${C4}\n${C3}\u@\H${C4} ${C2}\w${C4}\n${C3}\$ ${C4}'
+
+export PS1
