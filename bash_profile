@@ -47,5 +47,6 @@ uptime
 echo
 
 
+source $BASEDIR/colors.sh
 source $BASEDIR/prompt_set
 eval `dircolors $BASEDIR/dircolors.xterm`
